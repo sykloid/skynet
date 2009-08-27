@@ -27,3 +27,18 @@ from math import factorial as builtin_factorial
 
 # Use the fastest one.
 factorial = builtin_factorial
+
+def recursive_gcd(m, n) :
+    '''Computes the GCD (Greatest Common Divisor) of two numbers.'''
+
+    return m if n == 0 else recursive_gcd(n, m % n)
+
+def iterative_gcd(m, n) :
+    '''Computes the GCD (Greatest Common Divisor) of two numbers.'''
+
+    while n :
+        m, n = n, m % n
+
+    return m
+
+gcd = iterative_gcd
