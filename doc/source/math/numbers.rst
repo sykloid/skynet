@@ -16,3 +16,9 @@ This module defines some basic functions required for number theory, such as:
 .. function:: gcd(m, n)
 
     Computes the GCD (Greatest Common Divisor) of the two given numbers.
+
+.. function:: xgcd(m, n)
+
+    Computes the GCD ``g`` of the numbers ``m`` and ``n``, as well as two
+    numbers ``x`` and ``y`` such that ``m*x + n*y == g``. Returns ``(x, y,
+    g)``.
