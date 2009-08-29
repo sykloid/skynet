@@ -40,6 +40,10 @@ class FactorialTest(unittest.TestCase) :
 
 class GCDTest(unittest.TestCase) :
     known_values = {
+        (2, 3) : 1,
+        (8, 20) : 4,
+        (5, 2) : 1,
+        (42, 91) : 7,
         (5, 0) : 5,
         (2, 1) : 1,
         (64, 16) : 16,
@@ -57,6 +61,33 @@ class GCDTest(unittest.TestCase) :
         for (m, n), g in self.known_values.items() :
             self.assertEqual(g, numbers.iterative_gcd(m, n))
             self.assertEqual(g, numbers.iterative_gcd(n, m))
+
+class XGCDTest(unittest.TestCase) :
+    known_values = {
+        (2, 3) : 1,
+        (8, 20) : 4,
+        (5, 2) : 1,
+        (42, 91) : 7,
+        (75, 275) : 25,
+        (5, 0) : 5,
+        (2, 1) : 1,
+        (64, 16) : 16,
+        (97, 33) : 1,
+        (91, 78) : 13,
+        (10**10, 2**12) : 2**10,
+    }
+
+    def test_iterative_xgcd(self) :
+        for (m, n), g in self.known_values.items() :
+            x, y, h = numbers.iterative_xgcd(m, n)
+            self.assertEqual(g, h)
+            self.assertEqual(x*m + y*n, h)
+
+    def test_recursive_xgcd(self) :
+        for (m, n), g in self.known_values.items() :
+            x, y, h = numbers.recursive_xgcd(m, n)
+            self.assertEqual(g, h)
+            self.assertEqual(x*m + y*n, h)
 
 if __name__ == '__main__':
     unittest.main()
