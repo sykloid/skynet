@@ -184,3 +184,6 @@ def is_prime_miller_rabin(n, s = 25) :
             return False
 
     return True
+
+is_prime = is_prime_miller_rabin
+is_prime_deterministic = is_prime_6k1
