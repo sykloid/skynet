@@ -89,5 +89,17 @@ class XGCDTest(unittest.TestCase) :
             self.assertEqual(g, h)
             self.assertEqual(x*m + y*n, h)
 
+class PrimalityTest(unittest.TestCase) :
+    known_values = [2, 3, 127, 953, 881, 743, 409, 311, 317, 43]
+    wrong_values = [1, 703, 608, 705, 764, 837, 949, 210, 336, 81]
+
+    def test_is_prime_vanilla_known_values(self) :
+        for p in self.known_values :
+            self.assertTrue(numbers.is_prime_vanilla(p))
+
+    def test_is_prime_vanilla_wrong_values(self) :
+        for q in self.wrong_values :
+            self.assertFalse(numbers.is_prime_vanilla(q))
+
 if __name__ == '__main__':
     unittest.main()
