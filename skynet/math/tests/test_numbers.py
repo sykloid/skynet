@@ -93,6 +93,8 @@ class PrimalityTest(unittest.TestCase) :
     known_values = [2, 3, 127, 953, 881, 743, 409, 311, 317, 43]
     wrong_values = [1, 703, 608, 705, 764, 837, 949, 210, 336, 81]
 
+    pseudoprimes = [561, 1105, 1729]
+
     def test_is_prime_vanilla_known_values(self) :
         for p in self.known_values :
             self.assertTrue(numbers.is_prime_vanilla(p))
@@ -116,6 +118,18 @@ class PrimalityTest(unittest.TestCase) :
     def test_is_prime_regex_wrong_values(self) :
         for q in self.wrong_values :
             self.assertFalse(numbers.is_prime_regex(q))
+
+    def test_is_prime_fermat_pseudoprime_known_values(self) :
+        for p in self.known_values :
+            self.assertTrue(numbers.is_prime_fermat_pseudoprime(p))
+
+    def test_is_prime_fermat_pseudoprime_wrong_values(self) :
+        for q in self.wrong_values :
+            self.assertFalse(numbers.is_prime_fermat_pseudoprime(q))
+
+    def test_is_prime_fermat_pseudoprime_pseudoprimes(self) :
+        for q in self.pseudoprimes :
+            self.assertTrue(numbers.is_prime_fermat_pseudoprime(q))
 
 if __name__ == '__main__':
     unittest.main()
