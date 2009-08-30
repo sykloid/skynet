@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 2
    
    math/numbers
+   profile
 
 Indices and tables
 ==================
