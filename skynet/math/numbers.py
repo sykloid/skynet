@@ -2,6 +2,7 @@
 
 from functools import reduce
 from operator import mul
+from random import randint
 
 import re
 
@@ -93,6 +94,7 @@ def is_prime_vanilla(n) :
     if n % 2 == 0 :
         return False
 
+    # TODO: Condense loop into any + comprehension.
     for i in range(3, int(n ** 0.5) + 1, 2) :
         if n % i == 0 :
             return False
@@ -112,6 +114,7 @@ def is_prime_6k1(n) :
     if n % 2 == 0 or n % 3 == 0 :
         return False
 
+    # TODO: Condense loop into any + comprehension.
     for i in range(6, int(n ** 0.5) + 2, 6) :
         if n % (i - 1) == 0 or n % (i + 1) == 0 :
             return False
@@ -134,3 +137,50 @@ def is_prime_fermat_pseudoprime(n) :
         return True
 
     return pow(2, n - 1, n) == 1
+
+def miller_rabin_witness(a, n, t, u) :
+    '''Determines if the number 'a' is a witness to the compositeness of the
+    number 'n', where (n - 1) == u*2**t.
+    '''
+
+    x = pow(a, u, n)
+
+    for i in range(t) :
+        y = x*x % n
+
+        if y == 1 and x != 1 and x != n - 1 :
+            return True
+
+        x = y
+
+    if y != 1 :
+        return True
+
+    return False
+
+def is_prime_miller_rabin(n, s = 25) :
+    '''Tests if a the given number is prime.'''
+
+    if n < 2 :
+        return False
+
+    if n == 2 :
+        return True
+
+    if n % 2 == 0 :
+        return False
+
+    # Express n - 1 in the form u * 2 ** t
+    b = bin(n - 1)[2:]
+    u = b.rstrip('0')
+    t = len(b) - len(u)
+    u = int(u, 2)
+
+    # Ask each witness.
+    # TODO: Condense loop into any + comprehension.
+    for i in range(s) :
+        a = randint(2, n - 1)
+        if miller_rabin_witness(a, n, t, u) :
+            return False
+
+    return True
