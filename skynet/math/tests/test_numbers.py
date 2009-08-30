@@ -101,5 +101,13 @@ class PrimalityTest(unittest.TestCase) :
         for q in self.wrong_values :
             self.assertFalse(numbers.is_prime_vanilla(q))
 
+    def test_is_prime_6k1_known_values(self) :
+        for p in self.known_values :
+            self.assertTrue(numbers.is_prime_6k1(p))
+
+    def test_is_prime_6k1_wrong_values(self) :
+        for q in self.wrong_values :
+            self.assertFalse(numbers.is_prime_6k1(q))
+
 if __name__ == '__main__':
     unittest.main()
