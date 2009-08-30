@@ -3,6 +3,8 @@
 from functools import reduce
 from operator import mul
 
+import re
+
 ## Factorial
 
 # Implementation of standard recursive definition.
@@ -114,3 +116,6 @@ def is_prime_6k1(n) :
 
     return True
 
+def is_prime_regex(n) :
+    '''Tests if the given number is prime.'''
+    return not re.match(r"^1?$|^(11+?)\1+$", "1" * n)
