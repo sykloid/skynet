@@ -74,3 +74,22 @@ def iterative_xgcd(m, n) :
     return (last_x, last_y, m)
 
 xgcd = iterative_xgcd
+
+## Primality Testing
+
+def is_prime_vanilla(n) :
+    if n < 2 :
+        return False
+
+    if n == 2 :
+        return True
+
+    if n % 2 == 0 :
+        return False
+
+    for i in range(3, int(n ** 0.5) + 1, 2) :
+        if n % i == 0 :
+            return False
+
+    return True
+
