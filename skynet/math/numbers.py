@@ -79,6 +79,8 @@ xgcd = iterative_xgcd
 
 ## Primality Testing
 
+# Deterministic Algorithms.
+
 # Standard test, checks every factor to the square root.
 def is_prime_vanilla(n) :
     '''Tests if the given number is prime.'''
@@ -119,3 +121,16 @@ def is_prime_6k1(n) :
 def is_prime_regex(n) :
     '''Tests if the given number is prime.'''
     return not re.match(r"^1?$|^(11+?)\1+$", "1" * n)
+
+# Probabilistic Algorithms.
+
+def is_prime_fermat_pseudoprime(n) :
+    '''Tests if a number is a base 2 Fermat Pseudoprime.'''
+
+    if n < 2 :
+        return False
+
+    if n == 2 :
+        return True
+
+    return pow(2, n - 1, n) == 1
