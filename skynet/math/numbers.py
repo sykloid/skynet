@@ -77,7 +77,9 @@ xgcd = iterative_xgcd
 
 ## Primality Testing
 
+# Standard test, checks every factor to the square root.
 def is_prime_vanilla(n) :
+    '''Tests if the given number is prime.'''
     if n < 2 :
         return False
 
@@ -89,6 +91,25 @@ def is_prime_vanilla(n) :
 
     for i in range(3, int(n ** 0.5) + 1, 2) :
         if n % i == 0 :
+            return False
+
+    return True
+
+# About as fast a deterministic test you're going to get.
+def is_prime_6k1(n) :
+    '''Tests if the given number is prime.'''
+
+    if n in (0, 1) :
+        return False
+
+    if n in (2, 3) :
+        return True
+
+    if n % 2 == 0 or n % 3 == 0 :
+        return False
+
+    for i in range(6, int(n ** 0.5) + 2, 6) :
+        if n % (i - 1) == 0 or n % (i + 1) == 0 :
             return False
 
     return True
