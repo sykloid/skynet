@@ -17,8 +17,16 @@ This module defines some basic functions required for number theory, such as:
 
     Computes the GCD (Greatest Common Divisor) of the two given numbers.
 
+.. function:: is_prime(n[, s = 25])
+
+    Tests whether or not the given number is a prime number.
+
+    Optionally takes the number of times to run the probabilistic test, the
+    defaults should be suitable for most scenarios.
+
 .. function:: xgcd(m, n)
 
     Computes the GCD ``g`` of the numbers ``m`` and ``n``, as well as two
     numbers ``x`` and ``y`` such that ``m*x + n*y == g``. Returns ``(x, y,
     g)``.
+
