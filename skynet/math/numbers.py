@@ -49,6 +49,16 @@ gcd = iterative_gcd
 
 ## Extended GCD
 
+def recursive_xgcd(m, n) :
+    '''Returns numbers x, y and g such that g = gcd(m, n) and x*m + y*n == g.'''
+
+    if n == 0 :
+        return (1, 0, m)
+
+    last_x, last_y, g = recursive_xgcd(n, m % n)
+
+    return last_y, last_x - (m // n) * last_y, g
+
 def iterative_xgcd(m, n) :
     '''Returns numbers x, y and g such that g = gcd(m, n) and x*m + y*n == g.'''
 
@@ -62,15 +72,5 @@ def iterative_xgcd(m, n) :
         last_y, y = y, last_y - q * y
 
     return (last_x, last_y, m)
-
-def recursive_xgcd(m, n) :
-    '''Returns numbers x, y and g such that g = gcd(m, n) and x*m + y*n == g.'''
-
-    if n == 0 :
-        return (1, 0, m)
-
-    last_x, last_y, g = recursive_xgcd(n, m % n)
-
-    return last_y, last_x - (m // n) * last_y, g
 
 xgcd = iterative_xgcd
