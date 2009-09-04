@@ -92,3 +92,13 @@ def prime_generator() :
             while x in composites or not x % 2 :
                 x += p
             composites[x] = p
+
+def primes(start = None, stop = None) :
+    '''Computes all primes numbers within the given specifications.'''
+    if start is None :
+        return prime_generator()
+
+    if stop is None :
+        return primes_until(start)
+
+    return primes_between(start, stop)
