@@ -74,3 +74,21 @@ def primes_between(m, n) :
         bitmap[2 - m] = True
 
     return [m + i for i in range(d) if bitmap[i]]
+
+def prime_generator() :
+    '''A generator for the sequence of prime numbers.'''
+
+    composites = {}
+
+    yield 2
+
+    for q in islice(count(3), 0, None, 2) :
+        p = composites.pop(q, None)
+        if p is None :
+            composites[q * q] = q
+            yield q
+        else :
+            x = p + q
+            while x in composites or not x % 2 :
+                x += p
+            composites[x] = p
