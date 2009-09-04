@@ -153,7 +153,7 @@ def miller_rabin_witness(a, n, t, u) :
     return False
 
 def is_prime_miller_rabin(n, s = 25) :
-    '''Tests if a the given number is prime.'''
+    '''Tests if the given number is prime.'''
 
     if n < 2 :
         return False
@@ -173,5 +173,8 @@ def is_prime_miller_rabin(n, s = 25) :
     # Ask each witness.
     return not any(miller_rabin_witness(randint(2, n - 1), n, t, u) for i in range(s))
 
-is_prime = is_prime_miller_rabin
+def is_prime(n) :
+    '''Tests if the given number is prime.'''
+    return is_prime_miller_rabin(n) if n >> 25 else is_prime_6k1(n)
+
 is_prime_deterministic = is_prime_6k1
