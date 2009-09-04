@@ -52,6 +52,16 @@ class GCDTest(unittest.TestCase) :
         (10**10, 2**12) : 2**10,
     }
 
+    known_chains = dict(known_values)
+
+    known_chains.update({
+        (2, 4, 6, 8) : 2,
+        (1, 2, 5, 10) : 1,
+        (100, 200, 225, 500) : 25,
+        (21, 56, 42, 91) : 7,
+        (8, 128, 1000) : 8,
+    })
+
     def test_recursive_gcd(self) :
         for (m, n), g in self.known_values.items() :
             self.assertEqual(g, numbers.recursive_gcd(m, n))
@@ -61,6 +71,32 @@ class GCDTest(unittest.TestCase) :
         for (m, n), g in self.known_values.items() :
             self.assertEqual(g, numbers.iterative_gcd(m, n))
             self.assertEqual(g, numbers.iterative_gcd(n, m))
+
+    def test_chained_gcd(self) :
+        for chain, g in self.known_chains.items() :
+            self.assertEqual(g, numbers.chained_gcd(*chain))
+
+class LCMTest(unittest.TestCase) :
+    known_values = {
+        (2, 3) : 6,
+        (8, 20) : 40,
+        (5, 2) : 10,
+        (5, 0) : 0,
+        (2, 1) : 2,
+        (64, 16) : 64,
+        (97, 33) : 3201,
+        (91, 78) : 546,
+        (10**10, 2**12) : 4*10**10,
+        (2, 4, 6, 8) : 24,
+        (1, 2, 5, 10) : 10,
+        (100, 200, 225, 500) : 9000,
+        (21, 56, 42, 91) : 2184,
+        (8, 128, 1000) : 16000,
+    }
+
+    def test_chained_lcm(self) :
+        for chain, lcm in self.known_values.items() :
+            self.assertEqual(lcm, numbers.chained_lcm(*chain))
 
 class XGCDTest(unittest.TestCase) :
     known_values = {
@@ -146,6 +182,7 @@ class PrimalityTest(unittest.TestCase) :
     def test_is_prime(self) :
         for q in self.wrong_values :
             self.assertFalse(numbers.is_prime(q))
+
 
 if __name__ == '__main__':
     unittest.main()
