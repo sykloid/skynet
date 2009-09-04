@@ -9,13 +9,33 @@
 This module defines various tools, especially generators and iterators to work
 with some common and interesting sequences.
 
+.. function:: fibonacci(n)
+
+    Computes the nth Fibonacci number. The 0th term is defined as 0, first term
+    as 1.
+
 .. function:: Fibonacci()
 
     A generator for the sequence of Fibonacci Numbers, ``0, 1, 1, 2, 3, 5, 8,
     ...``, where the first two terms are 0 and 1, and each subsequent term is
     the sum of the two previous terms.
 
-.. function:: fibonacci(n)
+.. function:: primes_until(n)
 
-    Computes the nth Fibonacci number. The 0th term is defined as 0, first term
-    as 1.
+    Returns a list of all prime numbers upto ``n``.
+
+.. function:: primes_between(m, n)
+
+    Returns a list of all prime numbers between ``m`` and ``n``.
+
+.. function:: prime_generator()
+
+    A generator for the infinite sequence of prime numbers.
+
+.. function:: primes([[start], stop])
+
+    A convenience function for unifying the various prime number generators.
+
+    * If both ``start`` and ``stop`` are specified, :func:`primes_between` is used.
+    * If only ``stop`` is specified, :func:`primes_until` is used.
+    * If nothing is specified, :func:`prime_generator` is used.
