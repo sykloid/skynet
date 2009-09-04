@@ -51,7 +51,7 @@ def iterative_gcd(m, n) :
 _gcd = iterative_gcd
 
 def chained_gcd(*numbers) :
-    '''Computes the GCD (Greatest Common Divisor of two or more numbers.'''
+    '''Computes the GCD (Greatest Common Divisor) of two or more numbers.'''
     if len(numbers) < 2 :
         raise TypeError(
             "gcd() takes at least 2 positional arguments, {} given.".format(
