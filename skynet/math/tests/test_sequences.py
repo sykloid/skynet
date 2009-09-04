@@ -1,5 +1,7 @@
 import unittest
 from skynet.math import sequences
+from skynet.math.numbers import is_prime
+from itertools import takewhile
 
 class FibonacciTest(unittest.TestCase) :
     known_values = {
@@ -34,6 +36,33 @@ class FibonacciTest(unittest.TestCase) :
             self.assertEqual(x, p + q)
 
             p, q = q, x
+
+class PrimeTest(unittest.TestCase) :
+    ranges = {
+        (1, 10) : [i for i in range(1, 10) if is_prime(i)],
+        (10, 100) : [i for i in range(10, 100) if is_prime(i)],
+        (100, 1000) : [i for i in range(100, 1000) if is_prime(i)],
+        (1000, 100000) : [i for i in range(1000, 10000) if is_prime(i)],
+    }
+
+    bound = 100000
+
+    ref = [i for i in range(bound) if is_prime(i)]
+
+    def test_primes_between(self) :
+        for lower, upper in self.ranges :
+            ref = [i for i in range(lower, upper) if is_prime(i)]
+            self.assertEqual(ref, list(sequences.primes_between(lower, upper)))
+
+    def test_primes_until(self) :
+        self.assertEqual(self.ref, list(sequences.primes_until(self.bound)))
+
+    def test_prime_generator(self) :
+        g = sequences.prime_generator()
+        self.assertEqual(
+            self.ref,
+            list(takewhile(lambda n: n < self.bound, sequences.prime_generator()))
+        )
 
 if __name__ == '__main__':
     unittest.main()
