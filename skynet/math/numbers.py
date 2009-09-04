@@ -48,7 +48,38 @@ def iterative_gcd(m, n) :
 
     return m
 
-gcd = iterative_gcd
+_gcd = iterative_gcd
+
+def chained_gcd(*numbers) :
+    '''Computes the GCD (Greatest Common Divisor of two or more numbers.'''
+    if len(numbers) < 2 :
+        raise TypeError(
+            "gcd() takes at least 2 positional arguments, {} given.".format(
+                len(numbers)
+            )
+        )
+
+    first, *rest = numbers
+    return reduce(_gcd, rest, first)
+
+gcd = chained_gcd
+
+def _lcm(m, n) :
+    '''Computes the LCM (Least Common Multiple) of two numbers.'''
+    return m * n // gcd(m, n)
+
+def chained_lcm(*numbers) :
+    if len(numbers) < 2 :
+        raise TypeError(
+            "lcm() takes at least 2 positional arguments, {} given.".format(
+                len(numbers)
+            )
+        )
+
+    first, *rest = numbers
+    return reduce(_lcm, rest, first)
+
+lcm = chained_lcm
 
 ## Extended GCD
 
