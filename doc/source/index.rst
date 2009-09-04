@@ -9,11 +9,12 @@ Welcome to Skynet's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
-   
-   math/numbers
-   math/sequences
-   profile
+    :maxdepth: 2
+
+    decorators
+    math/numbers
+    math/sequences
+    profile
 
 Indices and tables
 ==================
