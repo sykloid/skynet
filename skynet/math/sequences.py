@@ -43,3 +43,34 @@ def primes_until(n) :
     primes.extend([(i << 1) + 3 for i in range(length) if sieve[i]])
 
     return primes
+
+def primes_between(m, n) :
+    '''Generates all primes between given lower and upper bounds.'''
+
+    d = n - m + 1
+    bitmap = [True] * d
+    bitmap[(m % 2)::2] = [False] * int(round((1 + d - (m % 2)) // 2))
+
+    for i in range(3, int(n ** 0.5) + 1, 2) :
+        if i > m and not bitmap[i - m] :
+            continue
+
+        j = m // i*i
+
+        if j < m :
+            j += i
+
+        if j == i :
+            j += i
+
+        j -= m
+
+        bitmap[j::i] = [False] * len(bitmap[j::i])
+
+    if m <= 1 :
+        bitmap[1 - m] = False
+
+    if m <= 2 :
+        bitmap[2 - m] = True
+
+    return [m + i for i in range(d) if bitmap[i]]
