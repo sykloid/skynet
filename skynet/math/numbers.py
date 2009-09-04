@@ -82,6 +82,10 @@ xgcd = iterative_xgcd
 
 # Deterministic Algorithms.
 
+# A cache for primality testing. Improves speeds dramatically.
+prime_cache = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41,
+               43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+
 # Standard test, checks every factor to the square root.
 def is_prime_vanilla(n) :
     '''Tests if the given number is prime.'''
@@ -94,12 +98,7 @@ def is_prime_vanilla(n) :
     if n % 2 == 0 :
         return False
 
-    # TODO: Condense loop into any + comprehension.
-    for i in range(3, int(n ** 0.5) + 1, 2) :
-        if n % i == 0 :
-            return False
-
-    return True
+    return all(n % i for i in range(3, int(n ** 0.5) + 1, 2))
 
 # About as fast a deterministic test you're going to get.
 def is_prime_6k1(n) :
@@ -114,12 +113,7 @@ def is_prime_6k1(n) :
     if n % 2 == 0 or n % 3 == 0 :
         return False
 
-    # TODO: Condense loop into any + comprehension.
-    for i in range(6, int(n ** 0.5) + 2, 6) :
-        if n % (i - 1) == 0 or n % (i + 1) == 0 :
-            return False
-
-    return True
+    return all(n % (i - 1) and n % (i + 1) for i in range(6, int(n**0.5) + 2, 6))
 
 def is_prime_regex(n) :
     '''Tests if the given number is prime.'''
@@ -164,10 +158,10 @@ def is_prime_miller_rabin(n, s = 25) :
     if n < 2 :
         return False
 
-    if n == 2 :
+    if n in prime_cache :
         return True
 
-    if n % 2 == 0 :
+    if any((n % i) == 0 for i in prime_cache) :
         return False
 
     # Express n - 1 in the form u * 2 ** t
@@ -177,13 +171,7 @@ def is_prime_miller_rabin(n, s = 25) :
     u = int(u, 2)
 
     # Ask each witness.
-    # TODO: Condense loop into any + comprehension.
-    for i in range(s) :
-        a = randint(2, n - 1)
-        if miller_rabin_witness(a, n, t, u) :
-            return False
-
-    return True
+    return not any(miller_rabin_witness(randint(2, n - 1), n, t, u) for i in range(s))
 
 is_prime = is_prime_miller_rabin
 is_prime_deterministic = is_prime_6k1
