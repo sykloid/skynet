@@ -216,3 +216,9 @@ def digits(n) :
     '''Returns the sequence of digits of the given number.'''
 
     return (int(i) for i in str(n))
+
+def is_palindrome(n) :
+    '''Determines if the given number is a palindrome.'''
+
+    d = tuple(digits(n))
+    return d == d[::-1]
