@@ -209,3 +209,10 @@ def is_prime(n) :
     return is_prime_miller_rabin(n) if n >> 25 else is_prime_6k1(n)
 
 is_prime_deterministic = is_prime_6k1
+
+## Digits, and related.
+
+def digits(n) :
+    '''Returns the sequence of digits of the given number.'''
+
+    return (int(i) for i in str(n))
