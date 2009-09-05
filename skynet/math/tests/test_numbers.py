@@ -207,5 +207,40 @@ class DigitsTest(unittest.TestCase) :
                 )
             )
 
+class PalindromeTest(unittest.TestCase) :
+    known_values = [
+        1,
+        9,
+        11,
+        99,
+        121,
+        919,
+        1310131,
+        12345654321,
+        9878789,
+        11011,
+    ]
+
+    wrong_values = [
+        17,
+        21,
+        911,
+        131071,
+        225,
+        567,
+        436759384,
+        102944,
+        85492,
+        2034
+    ]
+
+    def test_palindrome_known_values(self) :
+        for p in self.known_values :
+            self.assertTrue(numbers.is_palindrome(p))
+
+    def test_palindrome_wrong_values(self) :
+        for n in self.wrong_values :
+            self.assertFalse(numbers.is_palindrome(n))
+
 if __name__ == '__main__' :
     unittest.main()
