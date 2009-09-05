@@ -183,6 +183,29 @@ class PrimalityTest(unittest.TestCase) :
         for q in self.wrong_values :
             self.assertFalse(numbers.is_prime(q))
 
+class DigitsTest(unittest.TestCase) :
+    known_values = [
+        0,
+        1,
+        9,
+        21,
+        78,
+        233,
+        571,
+        2347984,
+        22938479238472,
+        2**32,
+    ]
 
-if __name__ == '__main__':
+    def test_digits_known_values(self) :
+        for n in self.known_values :
+            self.assertEqual(
+                n,
+                sum(
+                    i*10**index
+                    for index, i in enumerate(reversed(tuple(numbers.digits(n))))
+                )
+            )
+
+if __name__ == '__main__' :
     unittest.main()
