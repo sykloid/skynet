@@ -8,6 +8,10 @@
 
 This module defines some basic functions required for number theory, such as:
 
+.. function:: digits(n)
+
+    Returns the sequence of digits of the given number ``n``.
+
 .. function:: factorial(n)
     
     Computes the factorial of the given number. Factorials are not defined for
