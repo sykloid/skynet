@@ -215,7 +215,7 @@ is_prime_deterministic = is_prime_6k1
 def digits(n) :
     '''Returns the sequence of digits of the given number.'''
 
-    return (int(i) for i in str(n))
+    return tuple(int(i) for i in str(n))
 
 def is_palindrome(n) :
     '''Determines if the given number is a palindrome.'''
