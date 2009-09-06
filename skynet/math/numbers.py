@@ -210,6 +210,38 @@ def is_prime(n) :
 
 is_prime_deterministic = is_prime_6k1
 
+## Factorization
+
+def prime_factors_trial_division(n) :
+    '''Factorizes a number into prime factors and corresponding exponents.'''
+
+    if is_prime(n) or n == 1 :
+        yield (n, 1)
+        return
+
+    exponent = 0
+    while n % 2 == 0:
+        exponent += 1
+        n //= 2
+
+    if exponent :
+        yield(2, exponent)
+
+    i = 3
+    while n != 1 :
+        exponent = 0
+        while n % i == 0 :
+            exponent += 1
+            n //= i
+
+        if exponent :
+            yield (i, exponent)
+        i += 2
+
+    return
+
+prime_factors = prime_factors_trial_division
+
 ## Digits, and related.
 
 def digits(n) :
