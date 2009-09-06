@@ -34,6 +34,11 @@ This module defines some basic functions required for number theory, such as:
     Optionally takes the number of times to run the probabilistic test, the
     defaults should be suitable for most scenarios.
 
+.. function:: prime_factors(n)
+
+    Generates a sequence of tuples representing the prime factors of the given
+    number, and their corresponding exponents.
+
 .. function:: xgcd(m, n)
 
     Computes the GCD ``g`` of the numbers ``m`` and ``n``, as well as two
