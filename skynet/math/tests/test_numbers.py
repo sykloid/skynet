@@ -1,5 +1,8 @@
 import unittest
 from skynet.math import numbers
+from random import randint
+from operator import mul
+from functools import reduce
 
 class FactorialTest(unittest.TestCase) :
     known_values = {
@@ -241,6 +244,17 @@ class PalindromeTest(unittest.TestCase) :
     def test_palindrome_wrong_values(self) :
         for n in self.wrong_values :
             self.assertFalse(numbers.is_palindrome(n))
+
+class FactorizationTest(unittest.TestCase) :
+    known_values = [1, 2] + [randint(3, 2**5) for i in range(18)]
+
+    def test_prime_factors_trial_division(self) :
+        for n in self.known_values :
+            self.assertEqual(
+                n,
+                reduce(mul, (p**e for p, e in
+                             numbers.prime_factors_trial_division(n)), 1)
+            )
 
 if __name__ == '__main__' :
     unittest.main()
