@@ -278,5 +278,65 @@ class DivisorsTest(unittest.TestCase) :
         for n, d in self.known_values.items() :
             self.assertEqual(d, sorted(list(numbers.divisors_cartesian_product(n))))
 
+class PhiTest(unittest.TestCase) :
+    known_values = {
+        1 : 0,
+        2 : 1,
+        5 : 4,
+        9 : 6,
+        27 : 18,
+        336 : 96,
+        1000 : 400,
+        2520 : 576,
+        27182 : 13590,
+        131071 : 131070,
+    }
+
+    def test_phi(self) :
+        for n, phi in self.known_values.items() :
+            self.assertEqual(phi, numbers.phi(n))
+
+class SigmaTest(unittest.TestCase) :
+    known_values = [
+        1,
+        2,
+        5,
+        9,
+        27,
+        336,
+        1000,
+        2520,
+        27182,
+        131071,
+    ]
+
+    power_bound = 10
+
+    def test_sigma(self) :
+        for n in self.known_values :
+            for k in range(1, self.power_bound) :
+                self.assertEqual(
+                    sum(i ** k for i in numbers.divisors(n)),
+                    numbers.sigma(n, k)
+                )
+
+class TauTest(unittest.TestCase) :
+    known_values = [
+        1,
+        2,
+        5,
+        9,
+        27,
+        336,
+        1000,
+        2520,
+        27182,
+        131071,
+    ]
+
+    def test_tau(self) :
+        for n in self.known_values :
+            self.assertEqual(len(list(numbers.divisors(n))), numbers.tau(n))
+
 if __name__ == '__main__' :
     unittest.main()
