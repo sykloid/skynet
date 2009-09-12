@@ -12,6 +12,12 @@ This module defines some basic functions required for number theory, such as:
 
     Returns the sequence of digits of the given number ``n``.
 
+.. function:: divisors(n)
+
+    Generates a list of divisors of the given number, including 1 and itself.
+    However, it does not generate in ascending order, and must be sorted if
+    required.
+
 .. function:: factorial(n)
     
     Computes the factorial of the given number. Factorials are not defined for
