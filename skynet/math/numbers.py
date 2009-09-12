@@ -250,13 +250,44 @@ def divisors_cartesian_product(n) :
         return [1]
 
     return (
-        reduce(mul, factors)
+        reduce(mul, factors, 1)
         for factors in product(
             *[[p**i for i in range(e + 1)] for (p, e) in prime_factors(n)]
         )
     )
 
 divisors = divisors_cartesian_product
+
+## Multiplicative functions.
+
+def phi(n) :
+    '''Returns the Euler Totient function of the given number.
+
+    This is the number of positive integers less than and relatively prime to
+    the given number.
+    '''
+
+    return reduce(mul, (p**(e - 1) * (p - 1) for p, e in prime_factors(n)), 1)
+
+def sigma(n, k = 1) :
+    '''Returns the sum of the kth powers of the divisors of the given number.'''
+
+    if n == 1 :
+        return 1
+
+    return reduce(
+        mul,
+        (sum(p**(j*k) for j in range(e + 1)) for (p, e) in prime_factors(n)),
+        1
+    )
+
+def tau(n) :
+    '''Returns the number of divisors of the given number.'''
+
+    if n == 1 :
+        return 1
+
+    return reduce(mul, (e + 1 for p, e in prime_factors(n)), 1)
 
 ## Digits, and related.
 
