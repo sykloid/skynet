@@ -1,4 +1,5 @@
 from itertools import islice, count
+from skynet.decorators import memoize
 
 def Fibonacci() :
     '''A Generator for the Fibonacci numbers.'''
@@ -8,6 +9,7 @@ def Fibonacci() :
         yield p
         p, q = q, p + q
 
+@memoize
 def fibonacci(n) :
     '''Computes the nth Fibonacci number.'''
 
