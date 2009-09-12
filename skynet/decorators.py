@@ -1,14 +1,14 @@
 from functools import wraps
 
 def memoize(function) :
-    cache = {}
+    function.cache = {}
 
     @wraps(function)
     def memoized_function(*args) :
         try :
-            return cache[args]
+            return function.cache[args]
         except KeyError :
-            cache[args] = function(*args)
-            return cache[args]
+            function.cache[args] = function(*args)
+            return function.cache[args]
 
     return memoized_function
