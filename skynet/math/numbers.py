@@ -1,6 +1,7 @@
 '''Tools for basic number theoretical manipulations.'''
 
 from functools import reduce
+from itertools import product
 from operator import mul
 from random import randint
 
@@ -241,6 +242,21 @@ def prime_factors_trial_division(n) :
     return
 
 prime_factors = prime_factors_trial_division
+
+def divisors_cartesian_product(n) :
+    '''Generates all the divisors of the given number. Does not yield in order.'''
+
+    if n == 1 :
+        return [1]
+
+    return (
+        reduce(mul, factors)
+        for factors in product(
+            *[[p**i for i in range(e + 1)] for (p, e) in prime_factors(n)]
+        )
+    )
+
+divisors = divisors_cartesian_product
 
 ## Digits, and related.
 
