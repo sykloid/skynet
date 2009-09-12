@@ -1,5 +1,8 @@
 import unittest
 from skynet.math import numbers
+from random import randint
+from operator import mul
+from functools import reduce
 
 class FactorialTest(unittest.TestCase) :
     known_values = {
@@ -241,6 +244,99 @@ class PalindromeTest(unittest.TestCase) :
     def test_palindrome_wrong_values(self) :
         for n in self.wrong_values :
             self.assertFalse(numbers.is_palindrome(n))
+
+class FactorizationTest(unittest.TestCase) :
+    known_values = [1, 2] + [randint(3, 2**5) for i in range(18)]
+
+    def test_prime_factors_trial_division(self) :
+        for n in self.known_values :
+            self.assertEqual(
+                n,
+                reduce(mul, (p**e for p, e in
+                             numbers.prime_factors_trial_division(n)), 1)
+            )
+
+class DivisorsTest(unittest.TestCase) :
+    known_values = {
+        1 : [1],
+        2 : [1, 2],
+        10 : [1, 2, 5, 10],
+        45 : [1, 3, 5, 9, 15, 45],
+        200 : [1, 2, 4, 5, 8, 10, 20, 25, 40, 50, 100, 200],
+        900 : [1, 2, 3, 4, 5, 6, 9, 10, 12, 15, 18, 20, 25, 30, 36, 45, 50, 60,
+               75, 90, 100, 150, 180, 225, 300, 450, 900],
+        1001 : [1, 7, 11, 13, 77, 91, 143, 1001],
+        9996 : [1, 2, 3, 4, 6, 7, 12, 14, 17, 21, 28, 34, 42, 49, 51, 68, 84,
+                98, 102, 119, 147, 196, 204, 238, 294, 357, 476, 588, 714, 833,
+                1428, 1666, 2499, 3332, 4998, 9996],
+        65536 : [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192,
+                 16384, 32768, 65536],
+        131073 : [1, 3, 43691, 131073],
+    }
+
+    def test_divisors_cartesian_product(self) :
+        for n, d in self.known_values.items() :
+            self.assertEqual(d, sorted(list(numbers.divisors_cartesian_product(n))))
+
+class PhiTest(unittest.TestCase) :
+    known_values = {
+        1 : 0,
+        2 : 1,
+        5 : 4,
+        9 : 6,
+        27 : 18,
+        336 : 96,
+        1000 : 400,
+        2520 : 576,
+        27182 : 13590,
+        131071 : 131070,
+    }
+
+    def test_phi(self) :
+        for n, phi in self.known_values.items() :
+            self.assertEqual(phi, numbers.phi(n))
+
+class SigmaTest(unittest.TestCase) :
+    known_values = [
+        1,
+        2,
+        5,
+        9,
+        27,
+        336,
+        1000,
+        2520,
+        27182,
+        131071,
+    ]
+
+    power_bound = 10
+
+    def test_sigma(self) :
+        for n in self.known_values :
+            for k in range(1, self.power_bound) :
+                self.assertEqual(
+                    sum(i ** k for i in numbers.divisors(n)),
+                    numbers.sigma(n, k)
+                )
+
+class TauTest(unittest.TestCase) :
+    known_values = [
+        1,
+        2,
+        5,
+        9,
+        27,
+        336,
+        1000,
+        2520,
+        27182,
+        131071,
+    ]
+
+    def test_tau(self) :
+        for n in self.known_values :
+            self.assertEqual(len(list(numbers.divisors(n))), numbers.tau(n))
 
 if __name__ == '__main__' :
     unittest.main()

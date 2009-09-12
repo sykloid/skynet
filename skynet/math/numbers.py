@@ -1,6 +1,7 @@
 '''Tools for basic number theoretical manipulations.'''
 
 from functools import reduce
+from itertools import product
 from operator import mul
 from random import randint
 
@@ -209,6 +210,84 @@ def is_prime(n) :
     return is_prime_miller_rabin(n) if n >> 25 else is_prime_6k1(n)
 
 is_prime_deterministic = is_prime_6k1
+
+## Factorization
+
+def prime_factors_trial_division(n) :
+    '''Factorizes a number into prime factors and corresponding exponents.'''
+
+    if is_prime(n) or n == 1 :
+        yield (n, 1)
+        return
+
+    exponent = 0
+    while n % 2 == 0:
+        exponent += 1
+        n //= 2
+
+    if exponent :
+        yield(2, exponent)
+
+    i = 3
+    while n != 1 :
+        exponent = 0
+        while n % i == 0 :
+            exponent += 1
+            n //= i
+
+        if exponent :
+            yield (i, exponent)
+        i += 2
+
+    return
+
+prime_factors = prime_factors_trial_division
+
+def divisors_cartesian_product(n) :
+    '''Generates all the divisors of the given number. Does not yield in order.'''
+
+    if n == 1 :
+        return [1]
+
+    return (
+        reduce(mul, factors, 1)
+        for factors in product(
+            *[[p**i for i in range(e + 1)] for (p, e) in prime_factors(n)]
+        )
+    )
+
+divisors = divisors_cartesian_product
+
+## Multiplicative functions.
+
+def phi(n) :
+    '''Returns the Euler Totient function of the given number.
+
+    This is the number of positive integers less than and relatively prime to
+    the given number.
+    '''
+
+    return reduce(mul, (p**(e - 1) * (p - 1) for p, e in prime_factors(n)), 1)
+
+def sigma(n, k = 1) :
+    '''Returns the sum of the kth powers of the divisors of the given number.'''
+
+    if n == 1 :
+        return 1
+
+    return reduce(
+        mul,
+        (sum(p**(j*k) for j in range(e + 1)) for (p, e) in prime_factors(n)),
+        1
+    )
+
+def tau(n) :
+    '''Returns the number of divisors of the given number.'''
+
+    if n == 1 :
+        return 1
+
+    return reduce(mul, (e + 1 for p, e in prime_factors(n)), 1)
 
 ## Digits, and related.
 
