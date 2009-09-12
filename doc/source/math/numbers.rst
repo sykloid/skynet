@@ -40,10 +40,25 @@ This module defines some basic functions required for number theory, such as:
     Optionally takes the number of times to run the probabilistic test, the
     defaults should be suitable for most scenarios.
 
+.. function:: phi(n)
+
+    Returns the Euler Totient function of the given number. ie, ``phi(n)`` is
+    the number of positive integers less than ``n`` and relatively prime to
+    ``n``.
+
 .. function:: prime_factors(n)
 
     Generates a sequence of tuples representing the prime factors of the given
     number, and their corresponding exponents.
+
+.. function:: sigma(n[, k = 1])
+
+    Returns the sum of the ``k``th powers of the divisors of ``n``. By default,
+    ``k`` is 1, where ``sigma(n)`` is the sum of the divisors of ``n``.
+
+.. function:: tau(n)
+
+    Returns the number of divisors of n. In fact, ``tau(n) == sigma(n, 0)``.
 
 .. function:: xgcd(m, n)
 
