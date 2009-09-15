@@ -18,3 +18,9 @@ combinations, partitions, etc.
     
     Computes the number of ways in which ``r`` items can be arranged from ``n``
     items.
+
+.. function:: next_permutation(items)
+
+    Generates the next lexicographical permutation of the given items,
+    following the given one. ``items`` must be a finite iterable consisting of
+    items which are comparable.
