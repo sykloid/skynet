@@ -1,4 +1,5 @@
 from itertools import islice, count
+from functools import partial
 from skynet.decorators import memoize
 
 def Fibonacci() :
@@ -104,3 +105,31 @@ def primes(start = None, stop = None) :
         return primes_until(start)
 
     return primes_between(start, stop)
+
+def polygonal_numbers(r) :
+    '''Generates a sequence of all r-gonal numbers.'''
+
+    term = 0
+    for k in count(0) :
+        yield term
+        increment = k * r - 2 * k + 1
+        term += increment
+
+triangular_numbers = partial(polygonal_numbers, r = 3)
+triangular_numbers.__doc__ = 'Generates a sequence of all triangular numbers.'
+pentagonal_numbers = partial(polygonal_numbers, r = 5)
+pentagonal_numbers.__doc__ = 'Generates a sequence of all pentagonal numbers.'
+hexagonal_numbers = partial(polygonal_numbers, r = 6)
+hexagonal_numbers.__doc__ = 'Generates a sequence of all hexagonal numbers.'
+
+def polygonal_number(n, r) :
+    '''Computes the nth r-gonal number.'''
+
+    return n * ((n - 1) * r - 2 * (n - 2)) // 2
+
+triangular_number = partial(polygonal_number, r = 3)
+triangular_number.__doc__ = 'Computes the nth triangular number.'
+pentagonal_number = partial(polygonal_number, r = 5)
+pentagonal_number.__doc__ = 'Computes the nth pentagonal number.'
+hexagonal_number = partial(polygonal_number, r = 6)
+hexagonal_number.__doc__ = 'Computes the nth hexagonal number.'
