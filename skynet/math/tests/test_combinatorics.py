@@ -37,5 +37,18 @@ class EnumerationTest(unittest.TestCase) :
         for (n, r), c in self.known_permutations.items() :
             self.assertEqual(c, combinatorics.P(n, r))
 
+class NextPermutationTest(unittest.TestCase) :
+    known_values = {
+        (9, 1, 0) : (1, 0, 9),
+        (0, 1, 2, 3) : (0, 1, 3, 2),
+        (5, 7, 2, 1) : (7, 1, 2, 5),
+        (1, 6, 5, 3, 2) : (2, 1, 3, 5, 6),
+        (9, 1, 4, 8, 7, 2, 0) : (9, 1, 7, 0, 2, 4, 8),
+    }
+
+    def test_next_permutation(self) :
+        for p, n in self.known_values.items() :
+            self.assertEqual(n, tuple(combinatorics.next_permutation(p)))
+
 if __name__ == '__main__' :
     unittest.main()
