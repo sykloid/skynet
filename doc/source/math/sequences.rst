@@ -20,6 +20,38 @@ with some common and interesting sequences.
     ...``, where the first two terms are 0 and 1, and each subsequent term is
     the sum of the two previous terms.
 
+.. function:: polygonal_number(n, r)
+
+    Computes the ``n``th ``r``-gonal number.
+
+.. function:: triangular_number(n)
+
+    A special case of :func:`polygonal_number`, when ``r = 3``.
+
+.. function:: pentagonal_number(n)
+
+    A special case of :func:`polygonal_number`, when ``r = 5``.
+
+.. function:: hexagonal_number(n)
+
+    A special case of :func:`polygonal_number`, when ``r = 6``.
+
+.. function:: polygonal_numbers(r)
+
+    A generator for the sequence of ``r``-gonal numbers.
+
+.. function:: triangular_numbers()
+
+    A special case of :func:`polygonal_numbers`, when ``r = 3``.
+
+.. function:: pentagonal_numbers()
+
+    A special case of :func:`polygonal_numbers`, when ``r = 5``.
+
+.. function:: hexagonal_numbers()
+
+    A special case of :func:`polygonal_numbers`, when ``r = 6``.
+
 .. function:: primes_until(n)
 
     Returns a list of all prime numbers upto ``n``.
