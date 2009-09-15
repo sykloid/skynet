@@ -64,5 +64,95 @@ class PrimeTest(unittest.TestCase) :
             list(takewhile(lambda n: n < self.bound, sequences.prime_generator()))
         )
 
+class PolygonalNumbers(unittest.TestCase) :
+    known_triangular_numbers = {
+        1 : 1,
+        2 : 3,
+        3 : 6,
+        4 : 10,
+        5 : 15,
+        6 : 21,
+        7 : 28,
+        8 : 36,
+        9 : 45,
+        10 : 55,
+        50 : 1275,
+        100 : 5050,
+        500 : 125250,
+        729 : 266085,
+        911 : 415416,
+    }
+
+    known_pentagonal_numbers = {
+        1 : 1,
+        2 : 5,
+        3 : 12,
+        4 : 22,
+        5 : 35,
+        6 : 51,
+        7 : 70,
+        8 : 92,
+        9 : 117,
+        10 : 145,
+        50 : 3725,
+        100 : 14950,
+        500 : 374750,
+        729 : 796797,
+        911 : 1244426,
+    }
+
+    known_hexagonal_numbers = {
+        1 : 1,
+        2 : 6,
+        3 : 15,
+        4 : 28,
+        5 : 45,
+        6 : 66,
+        7 : 91,
+        8 : 120,
+        9 : 153,
+        10 : 190,
+        50 : 4950,
+        100 : 19900,
+        500 : 499500,
+        729 : 1062153,
+        911 : 1658931,
+    }
+
+    TEST_BOUND = 1000
+
+    def test_triangular_number_ordinal(self) :
+        for k, t in self.known_triangular_numbers.items() :
+            self.assertEqual(t, sequences.triangular_number(k))
+
+    def test_pentagonal_number_ordinal(self) :
+        for k, t in self.known_pentagonal_numbers.items() :
+            self.assertEqual(t, sequences.pentagonal_number(k))
+
+    def test_hexagonal_number_ordinal(self) :
+        for k, t in self.known_hexagonal_numbers.items() :
+            self.assertEqual(t, sequences.hexagonal_number(k))
+
+    def test_triangular_number_sequence(self) :
+        t = sequences.triangular_numbers()
+        for i in range(self.TEST_BOUND) :
+            n = next(t)
+            if i in self.known_triangular_numbers :
+                self.assertEqual(self.known_triangular_numbers[i], n)
+
+    def test_pentagonal_number_sequence(self) :
+        t = sequences.pentagonal_numbers()
+        for i in range(self.TEST_BOUND) :
+            n = next(t)
+            if i in self.known_pentagonal_numbers :
+                self.assertEqual(self.known_pentagonal_numbers[i], n)
+
+    def test_hexagonal_number_sequence(self) :
+        t = sequences.hexagonal_numbers()
+        for i in range(self.TEST_BOUND) :
+            n = next(t)
+            if i in self.known_hexagonal_numbers :
+                self.assertEqual(self.known_hexagonal_numbers[i], n)
+
 if __name__ == '__main__':
     unittest.main()
