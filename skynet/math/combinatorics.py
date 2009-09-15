@@ -16,3 +16,28 @@ def P(n, r) :
     if r < 0 or r > n :
         raise ValueError("Cannot permute {} items from {}".format(r, n))
     return reduce(mul, range(n - r + 1, n + 1), 1)
+
+def next_permutation(items) :
+    '''Returns the next lexicographical permutation of the given items.'''
+
+    items = list(items)
+    j = len(items)
+    i = j - 1
+
+    while items[i - 1] >= items[i] :
+        i -= 1
+
+    while items[j - 1] <= items[i - 1] :
+        j -= 1
+
+    items[i - 1], items[j - 1] = items[j - 1], items[i - 1]
+
+    i += 1
+    j = len(items)
+
+    while i < j :
+        items[i - 1], items[j - 1] = items[j - 1], items[i - 1]
+        i += 1
+        j -= 1
+
+    return items
