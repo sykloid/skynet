@@ -281,6 +281,7 @@ def sigma(n, k = 1) :
         1
     )
 
+# Equivalent do sigma(n, 0), but this method is faster.
 def tau(n) :
     '''Returns the number of divisors of the given number.'''
 
