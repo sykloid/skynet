@@ -44,6 +44,11 @@ This module defines some basic functions required for number theory, such as:
 
     Tests if the given number is a square number.
 
+.. function:: modular_inverse(a, m)
+
+    Returns the modular inverse of ``a`` with respect to ``m``. Raises
+    ValueError if their GCD is not 1, as required.
+
 .. function:: phi(n)
 
     Returns the Euler Totient function of the given number. ie, ``phi(n)`` is
