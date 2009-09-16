@@ -353,5 +353,48 @@ class IsSquareTest(unittest.TestCase) :
         for i in self.wrong_values :
             self.assertFalse(numbers.is_square(i))
 
+class ModularInverseTest(unittest.TestCase) :
+    known_values = {
+        (1, 7) : 1,
+        (2, 7) : 4,
+        (3, 7) : 5,
+        (6, 7) : 6,
+        (5, 26) : 21,
+        (7, 26) : 15,
+        (9, 26) : 3,
+        (11, 26) : 19,
+        (17, 26) : 23,
+        (25, 26) : 25,
+    }
+
+    wrong_values = {
+        (2, 31) : 3,
+        (5, 31) : 7,
+        (8, 91) : 6,
+        (9, 91) : 10,
+        (9, 112) : 12,
+        (15, 112) : 81,
+        (13, 57) : 7,
+        (28, 57) : 39,
+        (41, 76) : 12,
+        (63, 82) : 56,
+    }
+
+    error_values = [(2, 4), (6, 9), (10, 25), (14, 91), (28, 102), (0, 2),
+                    (88, 121), (100, 625), (81, 243), (13, 676), (256, 1024)]
+
+    def test_modular_inverse_known_values(self) :
+        for (a, m), i in self.known_values.items() :
+            self.assertEqual(i, numbers.modular_inverse(a, m))
+
+    def test_modular_inverse_wrong_values(self) :
+        for (a, m), i in self.wrong_values.items() :
+            self.assertNotEqual(i, numbers.modular_inverse(a, m))
+
+    def test_modular_inverse_error_values(self) :
+        for (a, m) in self.error_values :
+            with self.assertRaises(ValueError) :
+                numbers.modular_inverse(a, m)
+
 if __name__ == '__main__' :
     unittest.main()
