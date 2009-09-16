@@ -9,6 +9,12 @@
 This module defines various tools, especially generators and iterators to work
 with some common and interesting sequences.
 
+.. function:: coprime_pairs(n[, a = 1, b = 1])
+
+    Generates all pairs of numbers ``(a, b)`` with both ``a`` and ``b`` less
+    than ``n``, such that ``a`` and ``b`` are relatively prime, ie.
+    ``gcd(a, b) == 1``.
+
 .. function:: fibonacci(n)
 
     Computes the nth Fibonacci number. The 0th term is defined as 0, first term
