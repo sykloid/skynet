@@ -147,3 +147,15 @@ def rationals(now = Fraction(0, 1)) :
         yield now
 
     return
+
+def coprime_pairs(n, a = 1, b = 1) :
+    yield (a, b)
+
+    k = 1
+    while a * k + b <= n :
+        for i in coprime_pairs(n, a * k + b, a) :
+            yield i
+
+        k += 1
+
+    return
