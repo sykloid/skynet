@@ -338,5 +338,20 @@ class TauTest(unittest.TestCase) :
         for n in self.known_values :
             self.assertEqual(len(list(numbers.divisors(n))), numbers.tau(n))
 
+class IsSquareTest(unittest.TestCase) :
+    known_values = [0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 1934881, 66049,
+                    506944, 136900, 685584, 3341584, 59536, 996004, 176400,
+                    2676496]
+
+    wrong_values = [2, 5, 8, 13, 41, 52, 78, 91, 119, 911, 166676, 457823]
+
+    def test_is_square_known_values(self) :
+        for i in self.known_values :
+            self.assertTrue(numbers.is_square(i))
+
+    def test_is_square_wrong_values(self) :
+        for i in self.wrong_values :
+            self.assertFalse(numbers.is_square(i))
+
 if __name__ == '__main__' :
     unittest.main()
