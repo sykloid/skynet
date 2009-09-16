@@ -24,3 +24,8 @@ combinations, partitions, etc.
     Generates the next lexicographical permutation of the given items,
     following the given one. ``items`` must be a finite iterable consisting of
     items which are comparable.
+
+.. function:: number_of_partitions(n)
+
+    Computes the number of ways in which the given number ``n`` can be
+    expressed as the sum of positive integers. 
