@@ -177,5 +177,19 @@ class RationalsTest(unittest.TestCase) :
     def test_rationals(self) :
         self.assertEqual(self.known_values, tuple(islice(sequences.rationals(), 15)))
 
+class CoprimePairsTest(unittest.TestCase) :
+    known_values = {
+        5 : [(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 3), (2, 5), (3, 4),
+             (3, 5), (4, 5)],
+        7 : [(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (2, 3),
+             (2, 5), (2, 7), (3, 4), (3, 5), (3, 7), (4, 5), (4, 7), (5, 6),
+             (5, 7), (6, 7)],
+    }
+
+    def test_coprime_pairs_known_values(self) :
+        for n, pairs in self.known_values.items() :
+            p = sorted(tuple(sorted(i)) for i in sequences.coprime_pairs(n))
+            self.assertEqual(pairs, p)
+
 if __name__ == '__main__':
     unittest.main()
