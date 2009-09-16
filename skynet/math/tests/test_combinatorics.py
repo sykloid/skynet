@@ -50,5 +50,28 @@ class NextPermutationTest(unittest.TestCase) :
         for p, n in self.known_values.items() :
             self.assertEqual(n, tuple(combinatorics.next_permutation(p)))
 
+class PartitionsTest(unittest.TestCase) :
+    known_values = {
+        0 : 1,
+        1 : 1,
+        2 : 2,
+        3 : 3,
+        4 : 5,
+        5 : 7,
+        6 : 11,
+        7 : 15,
+        8 : 22,
+        9 : 30,
+        10 : 42,
+        20 : 627,
+        50 : 204226,
+        100 : 190569292,
+        200 : 3972999029388,
+    }
+
+    def test_number_of_partitions(self) :
+        for i, p in self.known_values.items() :
+            self.assertEqual(p, combinatorics.number_of_partitions(i))
+
 if __name__ == '__main__' :
     unittest.main()
