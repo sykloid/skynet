@@ -40,6 +40,10 @@ This module defines some basic functions required for number theory, such as:
     Optionally takes the number of times to run the probabilistic test, the
     defaults should be suitable for most scenarios.
 
+.. function:: is_square(n)
+
+    Tests if the given number is a square number.
+
 .. function:: phi(n)
 
     Returns the Euler Totient function of the given number. ie, ``phi(n)`` is

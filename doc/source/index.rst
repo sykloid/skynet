@@ -12,6 +12,7 @@ Contents:
     :maxdepth: 2
 
     decorators
+    math/combinatorics
     math/numbers
     math/sequences
     profile
