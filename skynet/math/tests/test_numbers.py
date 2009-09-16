@@ -25,21 +25,15 @@ class FactorialTest(unittest.TestCase) :
         for n, factorial in self.known_values.items() :
             self.assertEqual(factorial, numbers.iterative_factorial(n))
 
-    def test_builtin_factorial_known_values(self) :
-        for n, factorial in self.known_values.items() :
-            self.assertEqual(factorial, numbers.builtin_factorial(n))
-
     def test_recursive_factorial_wrong_values(self) :
         for n in self.wrong_values :
-            self.assertRaises(ValueError, numbers.recursive_factorial, n)
+            with self.assertRaises(ValueError) :
+                numbers.recursive_factorial(n)
 
     def test_iterative_factorial_wrong_values(self) :
         for n in self.wrong_values :
-            self.assertRaises(ValueError, numbers.iterative_factorial, n)
-
-    def test_builtin_factorial_wrong_values(self) :
-        for n in self.wrong_values :
-            self.assertRaises(ValueError, numbers.builtin_factorial, n)
+            with self.assertRaises(ValueError) :
+                numbers.iterative_factorial(n)
 
 class GCDTest(unittest.TestCase) :
     known_values = {
