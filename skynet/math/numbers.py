@@ -302,3 +302,17 @@ def is_palindrome(n) :
 
     d = tuple(digits(n))
     return d == d[::-1]
+
+## Square Testing.
+
+square_endings = {0x00, 0x01, 0x04, 0x09, 0x10, 0x11, 0x19, 0x21, 0x24, 0x29,
+                   0x31, 0x39}
+
+def is_square(n) :
+    '''Determines if the given umber is a square.'''
+
+    if n & 0x3f not in square_endings :
+        return False
+
+    root = int(n**0.5)
+    return root*root == n
