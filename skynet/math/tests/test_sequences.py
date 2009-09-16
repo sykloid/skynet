@@ -1,7 +1,8 @@
 import unittest
 from skynet.math import sequences
 from skynet.math.numbers import is_prime
-from itertools import takewhile
+from itertools import takewhile, islice
+from fractions import Fraction
 
 class FibonacciTest(unittest.TestCase) :
     known_values = {
@@ -64,7 +65,7 @@ class PrimeTest(unittest.TestCase) :
             list(takewhile(lambda n: n < self.bound, sequences.prime_generator()))
         )
 
-class PolygonalNumbers(unittest.TestCase) :
+class PolygonalNumbersTest(unittest.TestCase) :
     known_triangular_numbers = {
         1 : 1,
         2 : 3,
@@ -153,6 +154,28 @@ class PolygonalNumbers(unittest.TestCase) :
             n = next(t)
             if i in self.known_hexagonal_numbers :
                 self.assertEqual(self.known_hexagonal_numbers[i], n)
+
+class RationalsTest(unittest.TestCase) :
+    known_values = (
+        Fraction(1, 1),
+        Fraction(1, 2),
+        Fraction(2, 1),
+        Fraction(1, 3),
+        Fraction(3, 2),
+        Fraction(2, 3),
+        Fraction(3, 1),
+        Fraction(1, 4),
+        Fraction(4, 3),
+        Fraction(3, 5),
+        Fraction(5, 2),
+        Fraction(2, 5),
+        Fraction(5, 3),
+        Fraction(3, 4),
+        Fraction(4, 1),
+    )
+
+    def test_rationals(self) :
+        self.assertEqual(self.known_values, tuple(islice(sequences.rationals(), 15)))
 
 if __name__ == '__main__':
     unittest.main()
