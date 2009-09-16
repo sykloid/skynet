@@ -1,6 +1,7 @@
 from itertools import islice, count
 from functools import partial
 from skynet.decorators import memoize
+from fractions import Fraction
 
 def Fibonacci() :
     '''A Generator for the Fibonacci numbers.'''
@@ -133,3 +134,16 @@ pentagonal_number = partial(polygonal_number, r = 5)
 pentagonal_number.__doc__ = 'Computes the nth pentagonal number.'
 hexagonal_number = partial(polygonal_number, r = 6)
 hexagonal_number.__doc__ = 'Computes the nth hexagonal number.'
+
+def rationals(now = Fraction(0, 1)) :
+
+    while True :
+        now = Fraction(
+            now.denominator,
+            now.denominator * (now.numerator // now.denominator) +
+            now.denominator - (now.numerator % now.denominator)
+        )
+
+        yield now
+
+    return
