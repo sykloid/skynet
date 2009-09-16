@@ -110,6 +110,19 @@ def iterative_xgcd(m, n) :
 
 xgcd = iterative_xgcd
 
+## Modular Inverse
+
+def modular_inverse(a, m) :
+    '''Determines the modular inverse of x with respect to m.'''
+
+    x, y, g = xgcd(a, m)
+
+    if g != 1 :
+        raise ValueError('Multiplicative inverse does not exist, as '
+                         'gcd({}, {} == {} != 1.'.format(a, m, g))
+
+    return x % m
+
 ## Primality Testing
 
 # Deterministic Algorithms.
