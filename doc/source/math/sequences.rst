@@ -71,3 +71,8 @@ with some common and interesting sequences.
     * If both ``start`` and ``stop`` are specified, :func:`primes_between` is used.
     * If only ``stop`` is specified, :func:`primes_until` is used.
     * If nothing is specified, :func:`prime_generator` is used.
+
+.. function:: rationals([now = Fraction(0, 1)])
+
+    Generates the sequence of irreducible positive rational numbers, using the
+    *Gibbons, Lester and Bird* Algorithm.
