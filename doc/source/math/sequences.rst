@@ -22,7 +22,7 @@ with some common and interesting sequences.
 
 .. function:: polygonal_number(n, r)
 
-    Computes the ``n``th ``r``-gonal number.
+    Computes the ``n`` th ``r``-gonal number.
 
 .. function:: triangular_number(n)
 
